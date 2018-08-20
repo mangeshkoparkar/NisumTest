@@ -1,0 +1,27 @@
+<div class="row" *ngFor="let product of products">
+  <div class="column"><img src={{product.hero.href}} (click)="openModal(product.images, product.name);" class="hover-shadow cursor" /></div>
+  <div class="column">
+    <h1>{{ product.name }}</h1>
+    <span> Special ${{product.priceRange.selling.low}} - ${{product.priceRange.selling.high}}</span></div>
+</div>
+
+<div id="myModal" class="modal">
+  <span class="close cursor" (click)="closeModal();">&times;</span>
+  <div class="modal-content">
+     <h5>{{ productName }}</h5> 
+    <div clas="align-middle" *ngFor="let image of productImages; let i = index">
+      <div class="mySlides" [ngClass]="{'display-none': i != slideIndex, 'display-block': i== slideIndex }">
+        <div class="numbertext">{{i + 1}} / {{productImages?.length}}</div>
+        <img src={{image.href}} />
+      </div>
+    </div>
+    <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
+    <a class="next" (click)="plusSlides(1)">&#10095;</a>
+    <div class="caption-container">
+      <p id="caption"></p>
+    </div>
+    <div class="column" *ngFor="let image of productImages; index as i">
+      <img class="demo cursor cor-thumb" src={{image.href}} (click)="currentSlide(i)" [ngClass]="{'active': i==slideIndex}" />
+    </div>
+  </div>
+</div>
